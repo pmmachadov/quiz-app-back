@@ -1,0 +1,284 @@
+{
+  "students": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440000",
+      "name": "Student 1"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440001",
+      "name": "Student 2"
+    }
+  ],
+  "teachers": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440010",
+      "name": "Teacher 1"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440011",
+      "name": "Teacher 2"
+    }
+  ],
+  "questions": [
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440100",
+      "student_id": "550e8400-e29b-41d4-a716-446655440000",
+      "topic": "javascript",
+      "question": "What is 2 + 2?",
+      "options": [
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "correct_option": "4"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440101",
+      "student_id": "550e8400-e29b-41d4-a716-446655440000",
+      "topic": "javascript",
+      "question": "What is the capital of France?",
+      "options": [
+        "Berlin",
+        "Madrid",
+        "Paris",
+        "Rome"
+      ],
+      "correct_option": "Paris"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440102",
+      "student_id": "550e8400-e29b-41d4-a716-446655440000",
+      "topic": "javascript",
+      "question": "What is the boiling point of water?",
+      "options": [
+        "90°C",
+        "100°C",
+        "110°C",
+        "120°C"
+      ],
+      "correct_option": "100°C"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440103",
+      "student_id": "550e8400-e29b-41d4-a716-446655440000",
+      "topic": "javascript",
+      "question": "Who wrote 'To Kill a Mockingbird'?",
+      "options": [
+        "Harper Lee",
+        "Mark Twain",
+        "Ernest Hemingway",
+        "F. Scott Fitzgerald"
+      ],
+      "correct_option": "Harper Lee"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440104",
+      "student_id": "550e8400-e29b-41d4-a716-446655440000",
+      "topic": "javascript",
+      "question": "What is the speed of light?",
+      "options": [
+        "299,792,458 m/s",
+        "150,000,000 m/s",
+        "300,000,000 m/s",
+        "299,792,000 m/s"
+      ],
+      "correct_option": "299,792,458 m/s"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440200",
+      "student_id": "550e8400-e29b-41d4-a716-446655440001",
+      "topic": "node.js",
+      "question": "What is the largest planet in our solar system?",
+      "options": [
+        "Earth",
+        "Mars",
+        "Jupiter",
+        "Saturn"
+      ],
+      "correct_option": "Jupiter"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440201",
+      "student_id": "550e8400-e29b-41d4-a716-446655440001",
+      "topic": "node.js",
+      "question": "What is the square root of 64?",
+      "options": [
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "correct_option": "8"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440202",
+      "student_id": "550e8400-e29b-41d4-a716-446655440001",
+      "topic": "node.js",
+      "question": "Who painted the Mona Lisa?",
+      "options": [
+        "Leonardo da Vinci",
+        "Vincent van Gogh",
+        "Pablo Picasso",
+        "Claude Monet"
+      ],
+      "correct_option": "Leonardo da Vinci"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440203",
+      "student_id": "550e8400-e29b-41d4-a716-446655440001",
+      "topic": "node.js",
+      "question": "What is the capital of Japan?",
+      "options": [
+        "Beijing",
+        "Seoul",
+        "Tokyo",
+        "Bangkok"
+      ],
+      "correct_option": "Tokyo"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440204",
+      "student_id": "550e8400-e29b-41d4-a716-446655440001",
+      "topic": "node.js",
+      "question": "What is the hardest natural substance on Earth?",
+      "options": [
+        "Gold",
+        "Iron",
+        "Diamond",
+        "Silver"
+      ],
+      "correct_option": "Diamond"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440300",
+      "student_id": "550e8400-e29b-41d4-a716-446655440000",
+      "topic": "react",
+      "question": "What is JSX?",
+      "options": [
+        "A JavaScript library",
+        "A syntax extension for JavaScript",
+        "A CSS framework",
+        "A type of database"
+      ],
+      "correct_option": "A syntax extension for JavaScript"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440301",
+      "student_id": "550e8400-e29b-41d4-a716-446655440000",
+      "topic": "react",
+      "question": "What is the virtual DOM?",
+      "options": [
+        "A real DOM",
+        "A lightweight copy of the real DOM",
+        "A programming language",
+        "A type of server"
+      ],
+      "correct_option": "A lightweight copy of the real DOM"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440302",
+      "student_id": "550e8400-e29b-41d4-a716-446655440000",
+      "topic": "react",
+      "question": "What is a component in React?",
+      "options": [
+        "A reusable piece of UI",
+        "A type of server",
+        "A database",
+        "A CSS framework"
+      ],
+      "correct_option": "A reusable piece of UI"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440303",
+      "student_id": "550e8400-e29b-41d4-a716-446655440000",
+      "topic": "react",
+      "question": "How do you create a component in React?",
+      "options": [
+        "By creating a function or class",
+        "By writing CSS",
+        "By setting up a server",
+        "By creating a database"
+      ],
+      "correct_option": "By creating a function or class"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440304",
+      "student_id": "550e8400-e29b-41d4-a716-446655440000",
+      "topic": "react",
+      "question": "What is state in React?",
+      "options": [
+        "A way to manage data in a component",
+        "A type of server",
+        "A database",
+        "A CSS framework"
+      ],
+      "correct_option": "A way to manage data in a component"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440400",
+      "student_id": "550e8400-e29b-41d4-a716-446655440001",
+      "topic": "sql",
+      "question": "What does SQL stand for?",
+      "options": [
+        "Structured Query Language",
+        "Simple Query Language",
+        "Standard Query Language",
+        "Sequential Query Language"
+      ],
+      "correct_option": "Structured Query Language"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440401",
+      "student_id": "550e8400-e29b-41d4-a716-446655440001",
+      "topic": "sql",
+      "question": "What is a primary key?",
+      "options": [
+        "A unique identifier for a record",
+        "A type of database",
+        "A programming language",
+        "A type of server"
+      ],
+      "correct_option": "A unique identifier for a record"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440402",
+      "student_id": "550e8400-e29b-41d4-a716-446655440001",
+      "topic": "sql",
+      "question": "What is a foreign key?",
+      "options": [
+        "A field that links to the primary key of another table",
+        "A type of server",
+        "A programming language",
+        "A type of database"
+      ],
+      "correct_option": "A field that links to the primary key of another table"
+    },
+    {
+      "id": "550e8400-e29b-41d4-a716-446655440403",
+      "student_id": "550e8400-e29b-41d4-a716-446655440001",
+      "topic": "sql",
+      "question": "What is an index in SQL?",
+      "options": [
+        "A performance optimization feature",
+        "A type of server",
+        "A programming language",
+        "A CSS framework"
+      ],
+      "correct_option": "A performance optimization feature"
+    },
+    {
+      "student_id": "4444",
+      "topic": "4444",
+      "question": "What is 4444?",
+      "options": [
+        "A 4444 language",
+        "A database",
+        "A server",
+        "A framework"
+      ],
+      "correct_option": "A 4444 language",
+      "id": "2dd8c8ca-b48e-4cc0-ad23-2cbbfc7fcb2e"
+    }
+  ]
+}
