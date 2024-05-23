@@ -1,0 +1,96 @@
+{
+  "questions": [
+    {
+      "id": "1",
+      "question": "What is Brain Rush?"
+    },
+    {
+      "id": "2",
+      "question": "How do you play Brain Rush?"
+    },
+    {
+      "id": "3",
+      "question": "How do you create questions in Brain Rush?"
+    },
+    {
+      "id": "4",
+      "question": "How does a player join a game in Brain Rush?"
+    },
+    {
+      "id": "5",
+      "question": "How is scoring done in Brain Rush?"
+    },
+    {
+      "id": "6",
+      "question": "What devices are compatible with Brain Rush?"
+    },
+    {
+      "id": "7",
+      "question": "Is Brain Rush free?"
+    },
+    {
+      "id": "8",
+      "question": "Can Brain Rush be played in multiple languages?"
+    },
+    {
+      "id": "9",
+      "question": "What types of questions can be created in Brain Rush?"
+    },
+    {
+      "id": "10",
+      "question": "How do you share a Brain Rush game with others?"
+    }
+  ],
+  "answers": [
+    {
+      "id": "1",
+      "question_id": "1",
+      "answer": "Brain Rush is an educational game similar to Kahoot where players answer questions to earn points."
+    },
+    {
+      "id": "2",
+      "question_id": "2",
+      "answer": "To play Brain Rush, the host creates a game and shares the code with players, who join and answer questions in real-time."
+    },
+    {
+      "id": "3",
+      "question_id": "3",
+      "answer": "Questions in Brain Rush are created through the host's dashboard, where they can add, edit, and organize questions."
+    },
+    {
+      "id": "4",
+      "question_id": "4",
+      "answer": "A player joins a Brain Rush game by entering the game code on the player’s login page."
+    },
+    {
+      "id": "5",
+      "question_id": "5",
+      "answer": "In Brain Rush, points are awarded based on the speed and accuracy of the players' answers."
+    },
+    {
+      "id": "6",
+      "question_id": "6",
+      "answer": "Brain Rush is compatible with any device that has a web browser, including computers, tablets, and smartphones."
+    },
+    {
+      "id": "7",
+      "question_id": "7",
+      "answer": "Yes, Brain Rush offers a free version with basic features, as well as subscription options for additional features."
+    },
+    {
+      "id": "8",
+      "question_id": "8",
+      "answer": "Yes, Brain Rush supports multiple languages, allowing players to play in their preferred language."
+    },
+    {
+      "id": "9",
+      "question_id": "9",
+      "answer": "In Brain Rush, you can create multiple-choice, true/false, and short answer questions."
+    },
+    {
+      "id": "10",
+      "question_id": "10",
+      "answer": "To share a Brain Rush game, the host can provide the game code or send a direct link to the participants."
+    }
+  ]
+}
