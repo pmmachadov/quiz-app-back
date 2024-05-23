@@ -2,16 +2,13 @@ const fs = require('fs');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 
-// Path to the JSON file
 const dataPath = path.join(__dirname, '../data/data.json');
 
-// Helper to read the JSON file
 const readData = () => {
     const jsonData = fs.readFileSync(dataPath);
     return JSON.parse(jsonData);
 };
 
-// Helper to write to the JSON file
 const writeData = (data) => {
     fs.writeFileSync(dataPath, JSON.stringify(data, null, 2));
 };
