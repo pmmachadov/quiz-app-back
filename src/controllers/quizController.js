@@ -1,3 +1,4 @@
+
 const {
     getAllQuestions,
     getQuestionById,
@@ -48,3 +49,4 @@ exports.deleteQuestion = (req, res) => {
         res.status(404).json({ error: 'Question not found' });
     }
 };
+

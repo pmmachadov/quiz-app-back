@@ -1,28 +1,42 @@
 const fs = require('fs');
 const path = require('path');
 
-exports.getTopicQuestions = (req, res) => {
-    const filePath = path.join(__dirname, '../data/topicQuestionsData.json');
-    fs.readFile(filePath, 'utf8', (err, data) => {
+const questionsFilePath = path.join(__dirname, '../data/topicQuestionsData.json');
+
+const getAllQuestions = (req, res) => {
+    fs.readFile(questionsFilePath, 'utf8', (err, data) => {
         if (err) {
-            return res.status(500).json({ message: 'Error reading topic questions data' });
+            return res.status(500).json({ error: 'Error reading JSON data' });
         }
-        const questions = JSON.parse(data).questions;
-        res.json(questions);
+        try {
+            const questions = JSON.parse(data).questions;
+            res.json({ questions });
+        } catch (parseError) {
+            res.status(500).json({ error: 'Error parsing JSON data' });
+        }
     });
 };
 
-exports.getQuestionById = (req, res) => {
-    const filePath = path.join(__dirname, '../data/topicQuestionsData.json');
-    fs.readFile(filePath, 'utf8', (err, data) => {
+const getQuestionById = (req, res) => {
+    fs.readFile(questionsFilePath, 'utf8', (err, data) => {
         if (err) {
-            return res.status(500).json({ message: 'Error reading topic questions data' });
+            return res.status(500).json({ error: 'Error reading JSON data' });
         }
-        const questions = JSON.parse(data).questions;
-        const question = questions.find(q => q.id === parseInt(req.params.id));
-        if (!question) {
-            return res.status(404).json({ message: 'Question not found' });
+        try {
+            const questions = JSON.parse(data).questions;
+            const question = questions.find(q => q.id === parseInt(req.params.id, 10));
+            if (question) {
+                res.json(question);
+            } else {
+                res.status(404).json({ error: 'Question not found' });
+            }
+        } catch (parseError) {
+            res.status(500).json({ error: 'Error parsing JSON data' });
         }
-        res.json(question);
     });
+};
+
+module.exports = {
+    getAllQuestions,
+    getQuestionById,
 };
