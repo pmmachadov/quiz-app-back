@@ -12,3 +12,4 @@ exports.getAllStudents = (req, res) => {
     const data = readData();
     res.status(200).json(data.students);
 };
+
