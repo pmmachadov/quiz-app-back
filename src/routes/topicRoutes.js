@@ -4,12 +4,14 @@ const pool = require('../config/db');
 
 // Obtener todos los temas
 router.get('/topics', (req, res) => {
+    console.log('Fetching all topics...');
     const query = 'SELECT * FROM Topics';
     pool.query(query, (err, results) => {
         if (err) {
             console.error('Error fetching topics:', err);
             res.status(500).json({ error: 'Error fetching topics' });
         } else {
+            console.log('Topics fetched:', results);
             res.status(200).json(results);
         }
     });
@@ -18,8 +20,9 @@ router.get('/topics', (req, res) => {
 // Obtener preguntas y respuestas para un tema específico
 router.get('/topics/:topicId/questions', (req, res) => {
     const { topicId } = req.params;
+    console.log(`Fetching questions for topic ID: ${topicId}`);
     const query = `
-    SELECT q.id AS question_id, q.statement, q.difficulty, a.id AS answer_id, a.answer, a.is_correct
+    SELECT q.id AS question_id, q.statement, a.id AS answer_id, a.answer, a.is_correct
     FROM Questions q
     JOIN Answers a ON q.id = a.question_id
     WHERE q.topic_id = ?;
@@ -38,12 +41,12 @@ router.get('/topics/:topicId/questions', (req, res) => {
                     acc.push({
                         question_id: row.question_id,
                         statement: row.statement,
-                        difficulty: row.difficulty,
                         answers: [answer]
                     });
                 }
                 return acc;
             }, []);
+            console.log('Questions and answers fetched:', formattedResults);
             res.status(200).json(formattedResults);
         }
     });
