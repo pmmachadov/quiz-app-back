@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../config/db');
 
-// Obtener todos los temas
 router.get('/topics', (req, res) => {
     const query = 'SELECT * FROM Topics';
     pool.query(query, (err, results) => {
@@ -16,7 +15,6 @@ router.get('/topics', (req, res) => {
     });
 });
 
-// Obtener preguntas y respuestas para un tema específico
 router.get('/topics/:topicId/questions', (req, res) => {
     const { topicId } = req.params;
     const query = `
