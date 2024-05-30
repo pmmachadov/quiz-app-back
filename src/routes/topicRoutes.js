@@ -4,7 +4,6 @@ const pool = require('../config/db');
 
 // Obtener todos los temas
 router.get('/topics', (req, res) => {
-    console.log('Fetching all topics...');
     const query = 'SELECT * FROM Topics';
     pool.query(query, (err, results) => {
         if (err) {
@@ -20,7 +19,6 @@ router.get('/topics', (req, res) => {
 // Obtener preguntas y respuestas para un tema específico
 router.get('/topics/:topicId/questions', (req, res) => {
     const { topicId } = req.params;
-    console.log(`Fetching questions for topic ID: ${topicId}`);
     const query = `
     SELECT q.id AS question_id, q.statement, a.id AS answer_id, a.answer, a.is_correct
     FROM Questions q
@@ -46,7 +44,6 @@ router.get('/topics/:topicId/questions', (req, res) => {
                 }
                 return acc;
             }, []);
-            console.log('Questions and answers fetched:', formattedResults);
             res.status(200).json(formattedResults);
         }
     });

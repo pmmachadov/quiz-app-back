@@ -6,7 +6,6 @@ const transporter = require('../config/email');
 exports.register = async (req, res) => {
   const { name, email, password } = req.body;
 
-  console.log('Received data:', { name, email, password });
 
   if (!name || !email || !password) {
     return res.status(400).json({ message: 'All fields are required' });
@@ -31,14 +30,12 @@ exports.register = async (req, res) => {
       `,
     };
 
-    console.log('Sending email with options:', mailOptions);
 
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         console.error('Error sending email:', error);
         return res.status(500).json({ message: 'Email could not be sent', error });
       } else {
-        console.log('Email sent successfully:', info);
         res.status(200).json({ message: 'Registration successful, please confirm your email' });
       }
     });
@@ -53,24 +50,18 @@ exports.register = async (req, res) => {
 
 exports.confirmEmail = async (req, res) => {
   const token = req.params.token;
-  console.log('Token received for confirmation:', token);
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    console.log('Decoded token:', decoded);
 
     const [user] = await pool.query('SELECT * FROM Teachers WHERE id = ?', [decoded.id]);
-    console.log('User found:', user);
 
     if (user.length === 0) {
-      console.log('User not found with ID:', decoded.id);
       return res.redirect(`${process.env.CLIENT_URL}/confirm?success=false`);
     }
 
     const [updateResult] = await pool.query('UPDATE Teachers SET isConfirmed = ? WHERE id = ?', [true, decoded.id]);
-    console.log('Update result:', updateResult);
 
     if (updateResult.affectedRows === 0) {
-      console.log('No rows affected. Update failed for user ID:', decoded.id);
       throw new Error('Failed to update confirmation status.');
     }
 
