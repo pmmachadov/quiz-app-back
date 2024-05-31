@@ -6,8 +6,8 @@ const transporter = require('../config/email');
 exports.register = async (req, res) => {
   const { name, email, password } = req.body;
 
-
   if (!name || !email || !password) {
+    console.error('All fields are required');
     return res.status(400).json({ message: 'All fields are required' });
   }
 
@@ -30,12 +30,12 @@ exports.register = async (req, res) => {
       `,
     };
 
-
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         console.error('Error sending email:', error);
         return res.status(500).json({ message: 'Email could not be sent', error });
       } else {
+        console.log('Email sent:', info.response);
         res.status(200).json({ message: 'Registration successful, please confirm your email' });
       }
     });
@@ -56,6 +56,7 @@ exports.confirmEmail = async (req, res) => {
     const [user] = await pool.query('SELECT * FROM Teachers WHERE id = ?', [decoded.id]);
 
     if (user.length === 0) {
+      console.error('User not found');
       return res.redirect(`${process.env.CLIENT_URL}/confirm?success=false`);
     }
 
@@ -77,6 +78,7 @@ exports.login = async (req, res) => {
   try {
     const [users] = await pool.query('SELECT * FROM Teachers WHERE email = ?', [email]);
     if (users.length === 0) {
+      console.error('User not found');
       return res.status(400).json({ message: 'User not found' });
     }
 
@@ -84,6 +86,7 @@ exports.login = async (req, res) => {
 
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
+      console.error('Incorrect password');
       return res.status(400).json({ message: 'Incorrect password' });
     }
 
