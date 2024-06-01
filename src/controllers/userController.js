@@ -12,6 +12,11 @@ exports.register = async (req, res) => {
   }
 
   try {
+    const [existingUser] = await pool.query('SELECT * FROM Teachers WHERE email = ?', [email]);
+    if (existingUser.length > 0) {
+      return res.status(400).json({ message: 'This email is already registered' });
+    }
+
     const hashedPassword = await bcrypt.hash(password, 10);
     const [result] = await pool.query('INSERT INTO Teachers (name, email, password) VALUES (?, ?, ?)', [name, email, hashedPassword]);
 
@@ -91,7 +96,7 @@ exports.login = async (req, res) => {
     }
 
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    res.status(200).json({ token });
+    res.status(200).json({ token, isConfirmed: user.isConfirmed });
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({ message: 'Server error' });
