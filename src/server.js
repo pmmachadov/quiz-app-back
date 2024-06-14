@@ -1,12 +1,13 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
-const app = express();
 require('dotenv').config();
+
+const app = express();
 
 // Importa las rutas
 const userRoutes = require('./routes/userRoutes');
-const topicRoutes = require('./routes/topicRoutes');
+const questionRoutes = require('./routes/questionRoutes');
 
 // Configuración de middlewares
 app.use(cors());
@@ -14,7 +15,7 @@ app.use(express.json());
 
 // Usa las rutas
 app.use('/api/user', userRoutes);
-app.use('/api', topicRoutes);
+app.use('/api/questions', questionRoutes);
 
 // Configuración para producción
 if (process.env.NODE_ENV === 'production') {

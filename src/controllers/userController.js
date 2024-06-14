@@ -1,7 +1,7 @@
-const pool = require('../config/db');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const transporter = require('../config/email');
+const userModel = require('../models/userModel');
 
 exports.register = async (req, res) => {
   const { name, email, password } = req.body;
@@ -12,13 +12,13 @@ exports.register = async (req, res) => {
   }
 
   try {
-    const [existingUser] = await pool.query('SELECT * FROM Teachers WHERE email = ?', [email]);
+    const existingUser = await userModel.getUserByEmail(email);
     if (existingUser.length > 0) {
       return res.status(400).json({ message: 'This email is already registered' });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    const [result] = await pool.query('INSERT INTO Teachers (name, email, password) VALUES (?, ?, ?)', [name, email, hashedPassword]);
+    const result = await userModel.createUser(name, email, hashedPassword);
 
     const token = jwt.sign({ id: result.insertId }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
@@ -57,15 +57,14 @@ exports.confirmEmail = async (req, res) => {
   const token = req.params.token;
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-    const [user] = await pool.query('SELECT * FROM Teachers WHERE id = ?', [decoded.id]);
+    const user = await userModel.getUserByEmail(decoded.id);
 
     if (user.length === 0) {
       console.error('User not found');
       return res.redirect(`${process.env.CLIENT_URL}/confirm?success=false`);
     }
 
-    const [updateResult] = await pool.query('UPDATE Teachers SET isConfirmed = ? WHERE id = ?', [true, decoded.id]);
+    const updateResult = await userModel.confirmUserEmail(decoded.id);
 
     if (updateResult.affectedRows === 0) {
       throw new Error('Failed to update confirmation status.');
@@ -81,7 +80,7 @@ exports.confirmEmail = async (req, res) => {
 exports.login = async (req, res) => {
   const { email, password } = req.body;
   try {
-    const [users] = await pool.query('SELECT * FROM Teachers WHERE email = ?', [email]);
+    const users = await userModel.getUserByEmail(email);
     if (users.length === 0) {
       console.error('User not found');
       return res.status(400).json({ message: 'User not found' });
