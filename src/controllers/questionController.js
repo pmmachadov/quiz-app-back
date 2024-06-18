@@ -1,11 +1,22 @@
-const db = require('../config/db');
+const questionModel = require('../models/questionModel');
 
-exports.getQuestionsByGame = async (req, res) => {
-    const { gameId } = req.params;
-    const [questions] = await db.query('SELECT * FROM Questions WHERE game_id = ?', [gameId]);
-    for (let question of questions) {
-        const [answers] = await db.query('SELECT * FROM Answers WHERE question_id = ?', [question.id]);
-        question.answers = answers;
+exports.getTopics = async (req, res) => {
+    try {
+        const topics = await questionModel.findTopics();
+        res.status(200).json(topics);
+    } catch (error) {
+        console.error('Error fetching topics:', error);
+        res.status(500).json({ error: 'Error fetching topics' });
     }
-    res.json(questions);
+};
+
+exports.getQuestionsByTopic = async (req, res) => {
+    const { topicId } = req.params;
+    try {
+        const questions = await questionModel.findByTopicId(topicId);
+        res.status(200).json(questions);
+    } catch (error) {
+        console.error('Error fetching questions:', error);
+        res.status(500).json({ error: 'Error fetching questions' });
+    }
 };

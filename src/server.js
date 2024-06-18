@@ -1,16 +1,18 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
-const app = express();
 require('dotenv').config();
 
-// Importa las rutas
-const userRoutes = require('./routes/userRoutes');
-const topicRoutes = require('./routes/topicRoutes');
+// Crear la aplicación de Express
+const app = express();
 
 // Configuración de middlewares
 app.use(cors());
 app.use(express.json());
+
+// Importa las rutas
+const userRoutes = require('./routes/userRoutes');
+const topicRoutes = require('./routes/topicRoutes');
 
 // Usa las rutas
 app.use('/api/user', userRoutes);
