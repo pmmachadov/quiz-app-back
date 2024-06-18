@@ -1,10 +1,25 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
+const http = require('http'); // Añadido
+const { Server } = require('socket.io'); // Añadido
 require('dotenv').config();
 
 // Crear la aplicación de Express
 const app = express();
+
+// Crear un servidor HTTP
+const server = http.createServer(app); // Modificado
+
+// Crear una instancia de Socket.IO
+const io = new Server(server, {
+    cors: {
+        origin: '*',
+    }
+}); // Modificado
+
+// Importar el controlador de Socket.IO
+const socketController = require('./controllers/socketController');
 
 // Configuración de middlewares
 app.use(cors());
@@ -27,8 +42,11 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
+// Inicializar Socket.IO usando el controlador
+socketController.initializeSocket(io);
+
 // Puerto de la aplicación
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
