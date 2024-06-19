@@ -13,7 +13,7 @@ const io = new Server(server, {
     }
 });
 
-const socketController = require('./controllers/socketController');
+const gameController = require('./controllers/gameController');
 const userRoutes = require('./routes/userRoutes');
 const topicRoutes = require('./routes/topicRoutes');
 const studentRoutes = require('./routes/studentRoutes');
@@ -33,7 +33,7 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
-socketController.initializeSocket(io);
+gameController.initializeSocket(io);
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
