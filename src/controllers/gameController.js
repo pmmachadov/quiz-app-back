@@ -23,6 +23,26 @@ function initializeSocket(io) {
             console.log(`Game started with code: ${gameCode} for topicId: ${topicId}`);
         });
 
+        // Manejar evento de obtener temas
+        socket.on('getTopics', async () => {
+            try {
+                const topics = await questionModel.findTopics();
+                socket.emit('topics', topics);
+            } catch (error) {
+                socket.emit('error', 'Error fetching topics');
+            }
+        });
+
+        // Manejar evento de obtener preguntas por tema
+        socket.on('getQuestionsByTopic', async (topicId) => {
+            try {
+                const questions = await questionModel.findByTopicId(topicId);
+                socket.emit('questions', questions);
+            } catch (error) {
+                socket.emit('error', 'Error fetching questions');
+            }
+        });
+
         // Join game event
         socket.on('joinGame', ({ gameCode, username }) => {
             const game = games.find(g => g.gameCode === gameCode);
