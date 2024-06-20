@@ -3,6 +3,7 @@ const questionQueries = require('../queries/questionQueries');
 
 exports.findTopics = async () => {
     const [results] = await pool.query(questionQueries.findTopics);
+    console.log('Topics from database:', results);
     return results;
 };
 

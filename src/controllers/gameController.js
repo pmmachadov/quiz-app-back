@@ -1,4 +1,5 @@
 const { v4: uuidv4 } = require('uuid');
+const questionModel = require('../models/questionModel'); // Asegúrate de importar esto
 
 let games = [];
 const waitingRooms = {}; // Store waiting room details
@@ -26,9 +27,12 @@ function initializeSocket(io) {
         // Manejar evento de obtener temas
         socket.on('getTopics', async () => {
             try {
+                console.log('getTopics event received');
                 const topics = await questionModel.findTopics();
+                console.log('Sending topics:', topics); // Agregar esta línea para depuración
                 socket.emit('topics', topics);
             } catch (error) {
+                console.error('Error fetching topics:', error); // Agregar esta línea para depuración
                 socket.emit('error', 'Error fetching topics');
             }
         });
@@ -36,9 +40,12 @@ function initializeSocket(io) {
         // Manejar evento de obtener preguntas por tema
         socket.on('getQuestionsByTopic', async (topicId) => {
             try {
+                console.log('getQuestionsByTopic event received for topicId:', topicId);
                 const questions = await questionModel.findByTopicId(topicId);
+                console.log('Sending questions:', questions); // Agregar esta línea para depuración
                 socket.emit('questions', questions);
             } catch (error) {
+                console.error('Error fetching questions:', error); // Agregar esta línea para depuración
                 socket.emit('error', 'Error fetching questions');
             }
         });

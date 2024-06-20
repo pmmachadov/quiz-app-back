@@ -14,12 +14,13 @@ const io = new Server(server, {
 });
 
 const gameController = require('./controllers/gameController');
-const userRoutes = require('./routes/userRoutes');
-const topicRoutes = require('./routes/topicRoutes');
-const studentRoutes = require('./routes/studentRoutes');
 
 app.use(cors());
 app.use(express.json());
+
+const userRoutes = require('./routes/userRoutes');
+const topicRoutes = require('./routes/topicRoutes');
+const studentRoutes = require('./routes/studentRoutes');
 
 app.use('/api/user', userRoutes);
 app.use('/api', topicRoutes);
