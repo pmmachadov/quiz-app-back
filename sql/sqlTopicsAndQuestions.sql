@@ -56,7 +56,8 @@ CREATE TABLE Tokens (
 -- Create the Students table
 CREATE TABLE Students (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100)
+    name VARCHAR(100),
+    username VARCHAR(100) NOT NULL
 );
 
 -- Create the Connections table
@@ -112,6 +113,7 @@ CREATE TABLE Statistics (
     FOREIGN KEY (game_id) REFERENCES Games(id),
     FOREIGN KEY (student_id) REFERENCES Students(id)
 );
+
 
 -- Insert Questions and Answers
 -- JavaScript Questions and Answers
