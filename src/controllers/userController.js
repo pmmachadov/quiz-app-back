@@ -47,22 +47,27 @@ exports.confirmEmail = async (req, res) => {
   }
 };
 
+
 exports.login = async (req, res) => {
   const { email, password } = req.body;
+  console.log('Received login request:', { email, password });
   try {
     const user = await userModel.findByEmail(email);
     if (!user) {
+      console.log('User not found');
       return res.status(400).json({ message: 'User not found' });
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
+      console.log('Incorrect password');
       return res.status(400).json({ message: 'Incorrect password' });
     }
 
     const token = authService.generateToken({ id: user.id });
     res.status(200).json({ token, isConfirmed: user.isConfirmed });
   } catch (error) {
-    res.status(500).json({ message: 'Server error' });
+    console.error('Error during login:', error);
+    res.status(500).json({ message: 'Server error', error: error.message });
   }
 };
