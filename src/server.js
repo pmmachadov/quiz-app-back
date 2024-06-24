@@ -1,4 +1,3 @@
-// server.js (Backend)
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
@@ -8,25 +7,31 @@ require('dotenv').config();
 
 const app = express();
 const server = http.createServer(app);
+
+// ➔ Cambiar origin a una lista que incluya el origen permitido, no usar '*'
+const allowedOrigins = ['http://localhost:5173', 'http://localhost:3000'];
 const io = new Server(server, {
     cors: {
-        origin: 'http://localhost:5173', // Cambia esto a la URL de tu cliente
+        origin: allowedOrigins, // Permitir la lista de orígenes
         methods: ['GET', 'POST'],
         allowedHeaders: ['Content-Type'],
-        credentials: true // Permitir el envío de cookies y credenciales
-    }
+        credentials: true,
+    },
 });
 
 const gameController = require('./controllers/gameController');
 
+// ➔ Cambiar origin a una lista que incluya el origen permitido, no usar '*'
 app.use(cors({
-    origin: 'http://localhost:5173', // Cambia esto a la URL de tu cliente
+    origin: allowedOrigins, // Permitir la lista de orígenes
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
-    credentials: true // Permitir el envío de cookies y credenciales
+    credentials: true,
 }));
+
 app.use(express.json());
 
+// Definir rutas
 const userRoutes = require('./routes/userRoutes');
 const topicRoutes = require('./routes/topicRoutes');
 const studentRoutes = require('./routes/studentRoutes');
@@ -35,6 +40,7 @@ app.use('/api/user', userRoutes);
 app.use('/api', topicRoutes);
 app.use('/api/student', studentRoutes);
 
+// Configurar la entrega de archivos estáticos en producción
 if (process.env.NODE_ENV === 'production') {
     const frontEndPath = path.join(__dirname, '../../quiz-app-front-end/dist');
     app.use(express.static(frontEndPath));
@@ -43,7 +49,7 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
-// Inicializar el socket.io en gameController
+// Inicializar los sockets
 gameController.initializeSocket(io);
 
 const PORT = process.env.PORT || 3000;
@@ -51,25 +57,27 @@ server.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
 
-// Aquí agregamos el manejo de eventos de socket.io
+// Manejar las conexiones socket.io
 io.on('connection', (socket) => {
     console.log('a user connected:', socket.id);
 
+    // Manejar el evento personalizado 'studentRegisterOrLogin'
     socket.on('studentRegisterOrLogin', ({ code, username }) => {
         console.log('studentRegisterOrLogin event received:', { code, username });
 
-        // Simular alguna lógica para registrar o iniciar sesión al estudiante
         const game = { code, name: 'Sample Game' }; // Ejemplo de objeto de juego
         const student = { username }; // Ejemplo de objeto de estudiante
 
-        // Emitir evento de éxito
-        socket.emit('joinSuccess', { game, student });
-
-        // Opcionalmente manejar errores
-        // socket.emit('joinError', { error: 'Some error message' });
+        socket.emit('joinSuccess', { game, student }); // Emitir evento de éxito
     });
 
-    socket.on('disconnect', () => {
-        console.log('user disconnected:', socket.id);
+    // Manejar la desconexión
+    socket.on('disconnect', (reason) => {
+        console.log('user disconnected:', socket.id, 'reason:', reason);
+    });
+
+    // Manejar errores de conexión
+    socket.on('connect_error', (err) => {
+        console.log('Connection error:', err);
     });
 });
