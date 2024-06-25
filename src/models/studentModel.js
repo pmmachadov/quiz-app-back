@@ -7,8 +7,8 @@ exports.findByUsername = async (username) => {
     return students[0];
 };
 
-exports.createStudent = async (name, username) => {
-    const [result] = await pool.query(studentQueries.createStudent, [name, username]);
+exports.createStudent = async (username, gameCode, icon) => {
+    const [result] = await pool.query(studentQueries.createStudent, [username, gameCode, icon]);
     return result.insertId;
 };
 
@@ -16,6 +16,7 @@ exports.findById = async (id) => {
     const [students] = await pool.query(studentQueries.findStudentById, [id]);
     return students[0];
 };
+
 
 exports.updatePassword = async (id, password) => {
     const hashedPassword = await bcrypt.hash(password, 10);
